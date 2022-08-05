@@ -4,13 +4,13 @@ console.log('Initiated keep-alive')
 
 interface KeepAliveProps {
     url: string;
-    gap?: number;
+    sleep?: number;
 }
 
 function KeepAlive(props: KeepAliveProps) {
 
     const url = props.url;
-    const gap = props.gap == null ? 5 * 60 * 1000 : props.gap;
+    const sleep = props.sleep == null ? 5 * 60 * 1000 : props.sleep;
 
     function handleErrors(response: { ok: any; statusText: string | undefined; }) {
         if (!response.ok) {
@@ -27,7 +27,7 @@ function KeepAlive(props: KeepAliveProps) {
                         console.log('An error occurred calling keep-alive endpoint')
                     }
                 )
-        }, gap)
+        }, sleep)
         return () => clearInterval(interval);
     })
 
